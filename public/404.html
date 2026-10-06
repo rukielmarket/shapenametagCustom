@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>페이지 이동 중</title></head>
+<body><script>
+(() => {
+  const segments = location.pathname.split('/').filter(Boolean);
+  const shapes = ['heart', 'bear', 'rabbit'];
+  const base = shapes.includes(segments[0]) ? '' : (segments[0] ? `/${segments[0]}` : '');
+  const route = location.pathname.slice(base.length) + location.search;
+  location.replace(`${base}/?route=${encodeURIComponent(route)}`);
+})();
+</script></body></html>
