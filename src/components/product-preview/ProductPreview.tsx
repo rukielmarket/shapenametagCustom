@@ -94,14 +94,14 @@ export default function ProductPreview({ model, parts, partColors, productId, ba
   const modelPath = `${import.meta.env.BASE_URL}${model.path.replace(/^\//, '')}`;
   const hasModel = !loadError;
   return <div className="preview-canvas-wrap">
-    <Canvas shadows camera={{ position: [0, 2.6, 5.3], fov: 38 }} dpr={[1, 1.7]}>
+    <Canvas shadows camera={{ position: [0, 1.2, 6], fov: 38 }} dpr={[1, 1.7]}>
       <color attach="background" args={[backgroundColor]} />
       <ambientLight intensity={0.65} />
       <directionalLight position={[3, 5, 4]} intensity={1.2} castShadow shadow-mapSize={[1024, 1024]} />
       <Suspense fallback={null}>
         {hasModel ? <ModelErrorBoundary key={modelPath} fallback={() => setLoadError(true)}><Model path={modelPath} parts={model.parts ?? parts} partColors={partColors} rotation={model.rotation} fallbackPartId={model.fallbackPartId} hideIcon={hideIcon} /></ModelErrorBoundary> : productId === 'pegboard' ? <DemoPegboard partColors={partColors} /> : <DemoNameTag partColors={partColors} />}
         <Environment preset="studio" environmentIntensity={0.35} />
-        <ContactShadows position={[0, -1.15, 0]} opacity={0.2} scale={7} blur={2.5} far={3} />
+        <ContactShadows position={[0, -1.45, 0]} opacity={0.2} scale={7} blur={2.5} far={3} />
       </Suspense>
       <OrbitControls enablePan={false} minDistance={3} maxDistance={8} minPolarAngle={0.45} maxPolarAngle={2.25} />
     </Canvas>
