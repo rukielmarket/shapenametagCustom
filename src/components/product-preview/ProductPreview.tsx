@@ -106,7 +106,7 @@ export default function ProductPreview({ model, parts, partColors, productId, ba
       <OrbitControls enablePan={false} minDistance={3} maxDistance={8} minPolarAngle={0.45} maxPolarAngle={2.25} />
     </Canvas>
     {loadError && <div className="preview-notice"><span className="notice-dot" /> 모델 파일을 찾을 수 없어 샘플 프리뷰를 표시하고 있어요.</div>}
-    <div className="preview-hint"><span>↔ 드래그하여 회전</span><span>스크롤하여 확대</span></div>
+    <div className="preview-hint"><span>드래그하여 회전</span><span>스크롤하여 확대</span></div>
   </div>;
 }
 

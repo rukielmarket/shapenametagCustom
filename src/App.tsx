@@ -3,6 +3,7 @@ import { ChevronRight } from 'lucide-react';
 import { colors } from './data/colors';
 import { shapeParts as parts, shapes } from './data/shapes';
 import ProductPreview from './components/product-preview/ProductPreview';
+import logo from './assets/logo.svg';
 const shapeForPath = (path: string) => shapes.find((shape) => path.toLowerCase().includes(shape.slug)) ?? shapes[0];
 const pathForShape = (slug: string, count: number) => {
   const firstPathPart = window.location.pathname.split('/').filter(Boolean)[0] ?? '';
@@ -51,11 +52,11 @@ export default function App() {
 
   return <main className="app-shell" id="top">
     <header className="topbar">
-      <a className="brand" href="/" aria-label="컬러 스튜디오 홈"><span className="brand-mark">✳</span><span>COLOR <b>STUDIO</b></span></a>
-      <div className="topbar-center"><span className="live-dot" /> SHAPE NAME TAG <span className="topbar-divider">/</span> 3D COLOR STUDIO</div>
+      <a className="brand" href="/" aria-label="루키엘 마켓 홈"><img src={logo} alt="루키엘" /></a>
+      <div className="topbar-center">SHAPE NAME TAG COLOR STUDIO</div>
     </header>
 
-    <nav className="shape-tabs" aria-label="네임택 모양 선택">{shapes.map((shape) => <a key={shape.id} href={pathForShape(shape.slug, 2)} className={`shape-tab ${shape.id === activeShape.id ? 'active' : ''}`} aria-current={shape.id === activeShape.id ? 'page' : undefined} onClick={(event) => { event.preventDefault(); selectShape(shape); }}><span className="shape-tab-icon">{shape.emoji}</span><span>{shape.label}</span></a>)}</nav>
+    <nav className="shape-tabs" aria-label="네임택 모양 선택">{shapes.map((shape) => <a key={shape.id} href={pathForShape(shape.slug, 2)} className={`shape-tab ${shape.id === activeShape.id ? 'active' : ''}`} aria-current={shape.id === activeShape.id ? 'page' : undefined} onClick={(event) => { event.preventDefault(); selectShape(shape); }}><span>{shape.label}</span></a>)}</nav>
 
     <section className="workspace">
       <div className="preview-column">
@@ -65,16 +66,16 @@ export default function App() {
           <ProductPreview model={model} parts={parts} partColors={partColors} productId="shape-name-tag" backgroundColor={previewBackground === 'black' ? '#493b52' : '#ffffff'} hideIcon={false} />
           <div className="preview-card-bottom"><div><strong>{activeShape.label} 네임택 · {model.label}</strong></div><div className="mini-swatches">{parts.map((part) => <span key={part.id} title={`${part.label}: ${partColors[part.id]}`} style={{ backgroundColor: colors.find((c) => c.id === partColors[part.id])?.hex }} />)}</div></div>
         </div>
-        <div className="preview-caption"><span><span className="caption-star">✳</span> 미리보기용 이미지로, 실제 상품과 컬러가 다를 수 있습니다.</span></div>
+        <div className="preview-caption"><span>미리보기용 이미지로, 실제 상품과 컬러가 다를 수 있습니다.</span></div>
       </div>
 
       <aside className="controls-column">
-        <section className="control-section model-section"><div className="control-title"><span className="step-number">01</span><div><h2>글자 수 선택</h2><p>원하는 글자 수의 네임택을 선택해 주세요.</p></div></div><div className="model-options" role="group" aria-label="글자 수 선택">{activeShape.models.map((item, index) => <button key={item.id} type="button" className={`model-option ${model.id === item.id ? 'selected' : ''}`} onClick={() => selectModel(item.id)} aria-pressed={model.id === item.id}><span className="part-index">0{index + 1}</span><span>{item.label}</span>{model.id === item.id && <ChevronRight size={15} className="part-chevron" />}</button>)}</div></section>
-        <section className="control-section part-section"><div className="control-title"><span className="step-number">02</span><div><h2>색상 파츠 선택</h2><p>색을 바꿀 부분을 선택해 주세요.</p></div></div><div className="part-options">{parts.map((part, index) => <button key={part.id} className={`part-option ${selectedPartId === part.id ? 'selected' : ''}`} onClick={() => setSelectedPartId(part.id)} aria-pressed={selectedPartId === part.id}><span className="part-index">0{index + 1}</span><span>{part.label}<small>컬러</small></span><span className="part-color-preview" style={{ background: colors.find((color) => color.id === partColors[part.id])?.hex }} />{selectedPartId === part.id && <ChevronRight size={15} className="part-chevron" />}</button>)}</div></section>
+        <section className="control-section model-section"><div className="control-title"><span className="step-number">01</span><div><h2>글자 수 선택</h2><p>넣으실 글자 수를 선택해 주세요.</p></div></div><div className="model-options" role="group" aria-label="글자 수 선택">{activeShape.models.map((item, index) => <button key={item.id} type="button" className={`model-option ${model.id === item.id ? 'selected' : ''}`} onClick={() => selectModel(item.id)} aria-pressed={model.id === item.id}><span className="part-index">0{index + 1}</span><span>{item.label}</span>{model.id === item.id && <ChevronRight size={15} className="part-chevron" />}</button>)}</div></section>
+        <section className="control-section part-section"><div className="control-title"><span className="step-number">02</span><div><h2>파츠 색상 선택</h2><p>색을 바꿀 부분을 선택해 주세요.</p></div></div><div className="part-options">{parts.map((part, index) => <button key={part.id} className={`part-option ${selectedPartId === part.id ? 'selected' : ''}`} onClick={() => setSelectedPartId(part.id)} aria-pressed={selectedPartId === part.id}><span className="part-index">0{index + 1}</span><span>{part.label}<small>컬러</small></span><span className="part-color-preview" style={{ background: colors.find((color) => color.id === partColors[part.id])?.hex }} />{selectedPartId === part.id && <ChevronRight size={15} className="part-chevron" />}</button>)}</div></section>
         <section className="control-section color-section"><div className="color-heading"><div className="control-title"><span className="step-number">03</span><div><h2>컬러 선택</h2><p>적용할 컬러를 골라주세요.</p></div></div><span className="selected-color-label">{colorLabel}</span></div><div className="color-grid">{visibleColors.map((color) => <button key={color.id} className={`color-option ${partColors[selectedPartId] === color.id ? 'selected' : ''} ${color.id === 'white' ? 'is-white' : ''}`} onClick={() => setPartColors((current) => ({ ...current, [selectedPartId]: color.id }))} aria-label={`${color.name} ${color.hex}`} aria-pressed={partColors[selectedPartId] === color.id}><span className="color-swatch" style={{ backgroundColor: color.hex }}>{partColors[selectedPartId] === color.id && <span className="swatch-check">✓</span>}</span><span className="color-name">{color.name}</span></button>)}</div></section>
-        <p className="controls-footnote"><span>✳</span> 배경과 글씨 컬러를 자유롭게 조합해 보세요.</p>
+        <p className="controls-footnote">배경과 글씨 컬러를 자유롭게 조합해 보세요.</p>
       </aside>
     </section>
-    <footer className="site-footer"><span>© 2026 RUKIELMARKET</span><span>SHAPE NAME TAG COLOR STUDIO</span></footer>
+    <footer className="site-footer"><span>2026 RUKIELMARKET</span><span>SHAPE NAME TAG COLOR STUDIO</span></footer>
   </main>;
 }

@@ -245,3 +245,23 @@ body::before{
 .model-option.selected{box-shadow:0 0 0 1px #aa7abc}
 .model-option .part-chevron{right:8px;bottom:18px}
 @media(max-width:760px){.shape-tabs{gap:6px;padding-top:10px}.shape-tab{min-width:0;flex:1;padding:10px 5px;font-size:13px}.shape-tab-icon{font-size:16px}.model-options{margin-left:20px;gap:7px}.model-option{padding:9px 8px;font-size:12px}}
+
+/* Shape tabs and length choices follow the compact, rounded control style. */
+:root{font-family:'NanumSquareNeo',sans-serif;font-weight:800}
+button,a{font-family:'NanumSquareNeo',sans-serif;font-weight:800}
+.shape-tabs{justify-content:flex-start;gap:8px;padding:12px 0 0;border-bottom:0}
+.shape-tab{min-width:0;padding:8px 14px;border:1px solid #d8c4e3;border-radius:7px;background:#fff;color:#725887;font-family:'NanumSquareNeo',sans-serif;font-size:14px;font-weight:800;transition:background .16s}
+.shape-tab:hover{transform:none;background:#fff7fb}
+.shape-tab.active{color:#573873;background:#fff1f8;border-color:#9a70b4;box-shadow:inset 0 0 0 1px #9a70b4}
+.model-options{gap:7px}
+.model-option{min-height:47px;padding:8px 10px;border-radius:7px;font-family:'NanumSquareNeo',sans-serif;font-size:12px;font-weight:800}
+.model-option .part-index{font-family:'NanumSquareNeo',sans-serif;font-size:12px;font-weight:800}
+.control-section{padding:14px 12px}
+@media(max-width:760px){
+  .shape-tabs{gap:6px;padding-top:9px}
+  .shape-tab{flex:1;padding:7px 8px;font-size:13px}
+  .model-options{margin-left:20px;gap:6px}
+  .model-option{min-height:44px;padding:7px 8px;font-size:13px}
+  .model-option .part-index{font-size:12px}
+  .control-section{padding:14px 11px}
+}
